@@ -1,0 +1,19 @@
+{
+  "albumData": {
+    "title": "Asia",
+    "description": "",
+    "access": "protected",
+    "location": "",
+    "date": {
+      "timestamp": "1531656495",
+      "formatted": "Jul 15, 2018, 12:08:15 PM UTC"
+    },
+    "geoData": {
+      "latitude": 0.0,
+      "longitude": 0.0,
+      "altitude": 0.0,
+      "latitudeSpan": 0.0,
+      "longitudeSpan": 0.0
+    }
+  }
+}

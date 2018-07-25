@@ -82,7 +82,7 @@ class Actor {
       var v = v1.minus(v2);
       var x = x1.minus(x2);
       return v1.minus(x.times(m*((Vector.dot(v, x))/Math.pow(x.magnitude, 2))));
-    }    
+    }
     actor1.velocity = newV(actor1.velocity, actor2.velocity, actor1.pos, actor2.pos, actor1.mass, actor2.mass);
     actor2.velocity = newV(actor2.velocity, actor1.velocity, actor2.pos, actor1.pos, actor2.mass, actor1.mass);
 
@@ -362,6 +362,6 @@ function runGame() {
   });
 }
 
-var newGame = function(parent){
+var newGame = function(){
   runGame();
 }
