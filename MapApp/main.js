@@ -8,13 +8,12 @@ function initMap() {
   });
 
   //get marker data from server
-  url = "http://localhost:5000/abc"
-  console.log(url)
+
   // loop through json files in folder
 
 
 
-  data = jQuery.getJSON('data/Asia/IMG_20180711_183536.jpg.json', function(data) {
+  data = jQuery.getJSON('MapApp/data/Asia/IMG_20180711_183536.jpg.json', function(data) {
     console.log(data)
     var pic = data.geoData
     var marker = new google.maps.Marker({position: {lat: pic.latitude, lng: pic.longitude}, map: map})
@@ -24,7 +23,7 @@ function initMap() {
       var y = event.va.clientY;
       var img = document.createElement("img");
       var src = document.getElementById("map");
-      img.src = 'data/Asia/IMG_20180711_183536.jpg' //need to modify later
+      img.src = 'MapApp/data/Asia/IMG_20180711_183536.jpg' //need to modify later
       img.id = "pic"
       img.style.display = '';
       img.style.position = 'absolute';
