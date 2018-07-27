@@ -14,9 +14,12 @@ body {
 .footer {
   flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
   color: white;
-  padding: 10px;
-  margin: 10px;
+  padding: 3px;
+  margin: 7px;
+  border: 3px;
   background-color: #333;
+  font-family: Lucida Console;
+  font-size: 10px;
 }
 
 .content a:hover {
