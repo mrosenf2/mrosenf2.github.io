@@ -1,0 +1,32 @@
+{
+  "title": "PANO_20180626_080100.jpg",
+  "description": "",
+  "url": "https://lh3.googleusercontent.com/-MKEOqeFxvnA/W2HVIwhrG3I/AAAAAAAAMY8/p_dzuNbahn0n3GDktVnLv6rIy2rnW8svgCLABGAYYCw/s0-d/PANO_20180626_080100.jpg",
+  "imageViews": "0",
+  "creationTime": {
+    "timestamp": "1533138210",
+    "formatted": "Aug 1, 2018, 3:43:30 PM UTC"
+  },
+  "modificationTime": {
+    "timestamp": "1533138415",
+    "formatted": "Aug 1, 2018, 3:46:55 PM UTC"
+  },
+  "geoData": {
+    "latitude": 20.859366666666666,
+    "longitude": 107.08044444444444,
+    "altitude": 77.41,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "geoDataExif": {
+    "latitude": 20.859366666666666,
+    "longitude": 107.08044444444444,
+    "altitude": 77.41,
+    "latitudeSpan": 0.0,
+    "longitudeSpan": 0.0
+  },
+  "photoTakenTime": {
+    "timestamp": "1529974896",
+    "formatted": "Jun 26, 2018, 1:01:36 AM UTC"
+  }
+}

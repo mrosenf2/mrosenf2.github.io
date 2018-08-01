@@ -19,7 +19,7 @@ function initMap() {
     var pic = data.geoData
     var datetime = data.photoTakenTime.formatted
     var path = window.location.origin + '/MapApp/data/Asia/IMG_20180711_183536.jpg'
-    imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'data/Asia/IMG_20180711_183536.jpg\' " + "style=\'height: 250px\'" + "/> </a>"
+    imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'data/Asia/IMG_20180711_183536.jpg\' " + "style=\'height: 250px\'" + "/> </a>"    
     contentstr = "<div style=\'margin: 0px\'> " + imgstr + "<p> " + datetime + " </p>" + " </div>"
     var marker = new google.maps.Marker(
       {position: {lat: pic.latitude, lng: pic.longitude},
