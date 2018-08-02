@@ -1,53 +1,67 @@
 var map;
 
-function geturl() {
-  var largeImage = document.getElementById('image');
-  var url=largeImage.getAttribute('src');
-  return url
-}
-function initMap() {
-  // console.log(fs.readdir())
+function initMap() {  
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 15.9757, lng: 102.6331},
     zoom: 6
   });
 
-  //get marker data from server
 
-  // loop through json files in folder
+  var metaRequest = new XMLHttpRequest();
+  url = "http://98.231.217.2:8080/meta"
+  baseurl = "http://98.231.217.2:8080/photos/"
+  // request metadata file
+  metaRequest.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+      // parse into names of individual files
+      var files = this.responseText.split('\r\n')
+      jsonFiles = files.filter(word => word.match(/\.*json$/))
+      jpgFiles = files.filter(word => word.match(/\.*jpg$/))
 
-  data = jQuery.getJSON('data/Asia/IMG_20180711_183536.jpg.json', function(data) {
-    var pic = data.geoData
-    var datetime = data.photoTakenTime.formatted
-    var path = window.location.origin + '/MapApp/data/Asia/IMG_20180711_183536.jpg'
-    imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'data/Asia/IMG_20180711_183536.jpg\' " + "style=\'height: 250px\'" + "/> </a>"
-    contentstr = "<div style=\'margin: 0px\'> " + imgstr + "<p> " + datetime + " </p>" + " </div>"
+      // for each JSON filename, get JSON data from server; add marker to map
+      jsonFiles.forEach(function(picdata) {
+        var jsonReq = new XMLHttpRequest();
+        jsonReq.onreadystatechange = function() {
+          if (this.readyState == 4 && this.status == 200) {
+            jsonResp = JSON.parse(this.responseText)
+            addMarker(jsonResp, map)
+          }
+        }
+        jsonReq.open("GET", baseurl + picdata, true)
+        jsonReq.send()
+      })
+    }
+  };
+  metaRequest.open("GET", url, true)
+  metaRequest.send()
+
+  function addMarker(jsonData, map) {
+    var pic = jsonData.geoData
     var marker = new google.maps.Marker(
       {position: {lat: pic.latitude, lng: pic.longitude},
       map: map,
       title: 'click to view image full size'
     })
-    var infowindow = new google.maps.InfoWindow({
-      content: contentstr,
-      maxwidth: 250
-    });
+    // adds listener for marker to create infowinder
     marker.addListener('mouseover', function() {
+      path = baseurl + jsonData.title
+      imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'" + path + "\' " + "style=\'height: 250px\'" + "/> </a>"
+      timestamp = jsonData.photoTakenTime.timestamp
+      datetime = moment(timestamp, "X").utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a')
+      contentstr = "<div style=\'margin: 0px\'> " + imgstr + "<p> " + datetime + " </p>" + " </div>"
+      var infowindow = new google.maps.InfoWindow({
+        content: contentstr,
+        maxwidth: 250
+      });
       infowindow.open(map, marker)
+      marker.addListener('mouseout', function() {
+        infowindow.close()
+      })
     })
     marker.addListener('click', function() {
       window.open(path, '_blank')
       infowindow.close()
     })
-    marker.addListener('mouseout', function() {
-      console.log('out');
-      tm = setTimeout(function() {
-        infowindow.close()
-      }, 1000)
-      marker.addListener('mouseover', function() {
-        marker.remove
-        clearTimeout(tm)
-      })
-    })
+  }
 
-  });
 }
