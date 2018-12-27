@@ -8,8 +8,9 @@ function initMap() {
 
 
   var metaRequest = new XMLHttpRequest();
-  url = "http://98.231.217.2:8080/meta"
-  baseurl = "http://98.231.217.2:8080/photos/"
+  
+  url = "http://192.168.1.112:8080/meta"
+  baseurl = "http://192.168.1.112:8080/photos/"
   // request metadata file
   metaRequest.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
