@@ -27,12 +27,13 @@ function initMap() {
           if (this.readyState == 4 && this.status == 200) {
             jsonResp = JSON.parse(this.responseText)
             counter += addMarker(jsonResp, map)
+            console.log(counter + ' pictures had no geodata')
           }
         }
         jsonReq.open("GET", url_files + picdata, true)
         jsonReq.send()
       })
-      console.log(counter + ' pictures had no geodata')
+      
     }
   };
   metaRequest.open("GET", url_meta, true)
