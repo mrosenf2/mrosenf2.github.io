@@ -19,18 +19,20 @@ function initMap() {
       jsonFiles = files.filter(word => word.match(/\.*json$/))
       jpgFiles = files.filter(word => word.match(/\.*jpg$/))
 
+      var counter = 0;
       // for each JSON filename, get JSON data from server; add marker to map
       jsonFiles.forEach(function(picdata) {
         var jsonReq = new XMLHttpRequest();
         jsonReq.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {
             jsonResp = JSON.parse(this.responseText)
-            addMarker(jsonResp, map)
+            counter += addMarker(jsonResp, map)
           }
         }
         jsonReq.open("GET", url_files + picdata, true)
         jsonReq.send()
       })
+      console.log(counter + ' pictures had no geodata')
     }
   };
   metaRequest.open("GET", url_meta, true)
@@ -65,10 +67,10 @@ function initMap() {
         window.open(path, '_blank')
         infowindow.close()
       })
+      return 0
     } else {
-      counter ++;
-    }
-    console.log(counter + ' pictures had no geodata')
+      return 1
+    }    
   }
 
 }
