@@ -38,31 +38,33 @@ function initMap() {
 
   function addMarker(jsonData, map) {
     var pic = jsonData.geoData
-    var marker = new google.maps.Marker(
-      {position: {lat: pic.latitude, lng: pic.longitude},
-      map: map,
-      title: 'click to view image full size'
-    })
-    // adds listener for marker to create infowinder
-    marker.addListener('mouseover', function() {
-      path = url_files + jsonData.title
-      imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'" + path + "\' " + "style=\'height: 250px\'" + "/> </a>"
-      timestamp = jsonData.photoTakenTime.timestamp
-      datetime = moment(timestamp, "X").utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a')
-      contentstr = "<div style=\'margin: 0px\'> " + imgstr + "<p> " + datetime + " </p>" + " </div>"
-      var infowindow = new google.maps.InfoWindow({
-        content: contentstr,
-        maxwidth: 250
-      });
-      infowindow.open(map, marker)
-      marker.addListener('mouseout', function() {
+    if (pic.lat != 0) {
+      var marker = new google.maps.Marker({
+          position: { lat: pic.latitude, lng: pic.longitude },
+          map: map,
+          title: 'click to view image full size'
+        })
+      // adds listener for marker to create infowinder
+      marker.addListener('mouseover', function () {
+        path = url_files + jsonData.title
+        imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'" + path + "\' " + "style=\'height: 250px\'" + "/> </a>"
+        timestamp = jsonData.photoTakenTime.timestamp
+        datetime = moment(timestamp, "X").utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a')
+        contentstr = "<div style=\'margin: 0px\'> " + imgstr + "<p> " + datetime + " </p>" + " </div>"
+        var infowindow = new google.maps.InfoWindow({
+          content: contentstr,
+          maxwidth: 250
+        });
+        infowindow.open(map, marker)
+        marker.addListener('mouseout', function () {
+          infowindow.close()
+        })
+      })
+      marker.addListener('click', function () {
+        window.open(path, '_blank')
         infowindow.close()
       })
-    })
-    marker.addListener('click', function() {
-      window.open(path, '_blank')
-      infowindow.close()
-    })
+    }
   }
 
 }
