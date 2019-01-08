@@ -38,7 +38,8 @@ function initMap() {
 
   function addMarker(jsonData, map) {
     var pic = jsonData.geoData
-    if (pic.lat != 0) {
+    var counter = 0;
+    if (pic.latitude != 0) {
       var marker = new google.maps.Marker({
           position: { lat: pic.latitude, lng: pic.longitude },
           map: map,
@@ -64,7 +65,10 @@ function initMap() {
         window.open(path, '_blank')
         infowindow.close()
       })
+    } else {
+      counter ++;
     }
+    console.log(counter + ' pictures had no geodata')
   }
 
 }
