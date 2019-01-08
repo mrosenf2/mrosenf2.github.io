@@ -45,7 +45,7 @@ function initMap() {
     })
     // adds listener for marker to create infowinder
     marker.addListener('mouseover', function() {
-      path = baseurl + jsonData.title
+      path = url_files + jsonData.title
       imgstr = "<a href=\'" + path + "\' target=\"_blank\">  <img src=\'" + path + "\' " + "style=\'height: 250px\'" + "/> </a>"
       timestamp = jsonData.photoTakenTime.timestamp
       datetime = moment(timestamp, "X").utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a')
