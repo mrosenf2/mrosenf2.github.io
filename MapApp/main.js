@@ -9,8 +9,8 @@ function initMap() {
 
   var metaRequest = new XMLHttpRequest();
   
-  url = "http://192.168.1.112:8080/meta"
-  baseurl = "http://192.168.1.112:8080/photos/"
+  url_meta = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/meta.txt"
+  url_files = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/AsiaPhotos/"
   // request metadata file
   metaRequest.onreadystatechange = function() {
     if (this.readyState == 4 && this.status == 200) {
@@ -28,12 +28,12 @@ function initMap() {
             addMarker(jsonResp, map)
           }
         }
-        jsonReq.open("GET", baseurl + picdata, true)
+        jsonReq.open("GET", url_files + picdata, true)
         jsonReq.send()
       })
     }
   };
-  metaRequest.open("GET", url, true)
+  metaRequest.open("GET", url_meta, true)
   metaRequest.send()
 
   function addMarker(jsonData, map) {
