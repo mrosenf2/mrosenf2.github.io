@@ -1,53 +1,53 @@
 var map;
 
-function initMap() {  
+function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: 15.9757, lng: 102.6331},
+    center: { lat: 15.9757, lng: 102.6331 },
     zoom: 6
   });
 
-
-  var metaRequest = new XMLHttpRequest();
   
-  url_meta = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/meta.txt"
   url_files = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/AsiaPhotos/"
-  // request metadata file
-  metaRequest.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      // parse into names of individual files
-      var files = this.responseText.split('\r\n')
-      jsonFiles = files.filter(word => word.match(/\.*json$/))
-      jpgFiles = files.filter(word => word.match(/\.*jpg$/))
+  url_meta = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/meta.json"
 
-      var counter = 0;
-      // for each JSON filename, get JSON data from server; add marker to map
-      jsonFiles.forEach(function(picdata) {
-        var jsonReq = new XMLHttpRequest();
-        jsonReq.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-            jsonResp = JSON.parse(this.responseText)
-            counter += addMarker(jsonResp, map)
-            console.log(counter + ' pictures had no geodata')
-          }
-        }
-        jsonReq.open("GET", url_files + picdata, true)
-        jsonReq.send()
-      })
-      
-    }
-  };
-  metaRequest.open("GET", url_meta, true)
-  metaRequest.send()
+  var findClosestLatLon = function(photoArr, lat, ts) {
+    var closestTSDiff1 = 1000000
+    var returnLatLon1 = 0
+    photoArr.forEach(photo => {
+      var curTS = photo.photoTakenTime.timestamp
+      if(curTS != ts && Math.abs(curTS - ts) < closestTSDiff1 && photo.geoData.latitude > 0 && photo.geoData.longitude > 0){
+        closestTSDiff1 = Math.abs(curTS - ts)
+        returnLatLon1 = lat ? photo.geoData.latitude : photo.geoData.longitude
+      }
+    })
+    return returnLatLon1 + (1 - (2*Math.random()))/200
+
+  }
+
+  $.getJSON(url_meta, function (data) {
+    var allPhotos = []
+    allPhotos = Array.from(data.photodata)
+    allPhotos.forEach(photo => {
+      if(photo.geoData.latitude == 0){
+        photo.geoData.latitude = findClosestLatLon(data.photodata, true, photo.photoTakenTime.timestamp)
+        photo.geoData.longitude = findClosestLatLon(data.photodata, false, photo.photoTakenTime.timestamp)
+        photo.geoData.guess = true
+      }
+      addMarker(photo, map)
+    })
+  })
+
 
   function addMarker(jsonData, map) {
     var pic = jsonData.geoData
     var counter = 0;
+
     if (pic.latitude != 0) {
       var marker = new google.maps.Marker({
-          position: { lat: pic.latitude, lng: pic.longitude },
-          map: map,
-          title: 'click to view image full size'
-        })
+        position: { lat: pic.latitude, lng: pic.longitude },
+        map: map,
+        title: 'click to view image full size'
+      })
       // adds listener for marker to create infowinder
       marker.addListener('mouseover', function () {
         path = url_files + jsonData.title
@@ -55,6 +55,11 @@ function initMap() {
         timestamp = jsonData.photoTakenTime.timestamp
         datetime = moment(timestamp, "X").utcOffset('+0700').format('MMMM Do YYYY, h:mm:ss a')
         contentstr = "<div style=\'margin: 0px\'> " + imgstr + "<p> " + datetime + " </p>" + " </div>"
+        if(pic.guess){
+          contentstr += "<div> Note: Exact location was not recorded</div>"
+        }
+        
+
         var infowindow = new google.maps.InfoWindow({
           content: contentstr,
           maxwidth: 250
@@ -71,7 +76,7 @@ function initMap() {
       return 0
     } else {
       return 1
-    }    
+    }
   }
 
 }
