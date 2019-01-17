@@ -33,8 +33,14 @@ function initMap() {
         photo.geoData.longitude = findClosestLatLon(data.photodata, false, photo.photoTakenTime.timestamp)
         photo.geoData.guess = true
       }
-      addMarker(photo, map)
+      //addMarker(photo, map)
     })
+    var markers = allPhotos.map(photo => {
+      return addMarker(photo)
+    })
+    var markerCluster = new MarkerClusterer(map, markers,
+      {imagePath: 'clusterimg/m'});
+
   })
 
 
@@ -45,7 +51,7 @@ function initMap() {
     if (pic.latitude != 0) {
       var marker = new google.maps.Marker({
         position: { lat: pic.latitude, lng: pic.longitude },
-        map: map,
+        //map: map,
         title: 'click to view image full size'
       })
       // adds listener for marker to create infowinder
@@ -73,10 +79,8 @@ function initMap() {
         window.open(path, '_blank')
         infowindow.close()
       })
-      return 0
-    } else {
-      return 1
-    }
+      return marker      
+    } 
   }
 
 }
