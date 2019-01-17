@@ -1,8 +1,23 @@
 var map;
+var styles = {
+  default: null,
+  hide: [
+    {
+      featureType: 'poi.business',
+      stylers: [{visibility: 'off'}]
+    }
+    // ,{
+    //   featureType: 'transit',
+    //   elementType: 'labels.icon',
+    //   stylers: [{visibility: 'off'}]
+    // }
+  ]
+};
 
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: { lat: 15.9757, lng: 102.6331 },
+    styles: styles['hide'],
     zoom: 6
   });
 
@@ -39,7 +54,10 @@ function initMap() {
       return addMarker(photo)
     })
     var markerCluster = new MarkerClusterer(map, markers,
-      {imagePath: 'clusterimg/m'});
+      {imagePath: 'clusterimg/m',
+      gridSize: 80,
+      maxZoom: 14
+    });
 
   })
 
@@ -51,7 +69,7 @@ function initMap() {
     if (pic.latitude != 0) {
       var marker = new google.maps.Marker({
         position: { lat: pic.latitude, lng: pic.longitude },
-        //map: map,
+        icon: 'marker.png',
         title: 'click to view image full size'
       })
       // adds listener for marker to create infowinder
