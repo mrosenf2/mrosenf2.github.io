@@ -18,7 +18,7 @@ app.config(['$routeProvider', function ($routeProvider) {
 // else 404
   .when("/404", {templateUrl: "views/partials/404.html", controller: "PageCtrl"})
   .when("/canvasgame", {templateUrl: "CanvasGame/CanvasGame.html", controller: "PageCtrl"})
-  // .when("/mapapp", {templateUrl: "MapApp/mapapp.html", controller: "PageCtrl"})
+  // .when("/mapapp", {templateUrl: "mapapp/mapapp.html", controller: "PageCtrl"})
   .otherwise({
     redirectTo: '/'
   })
