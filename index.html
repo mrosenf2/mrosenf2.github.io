@@ -1,42 +1,55 @@
 <!DOCTYPE html>
 <html>
-  <head lang="eng-us">
-    <meta charset="utf-8">
-    <meta name="viewport" content="initial-scale=1.0">
 
-    <title>M. Rosenfeld</title>
-    <link rel="stylesheet" href="css/style.css">
+<head lang="eng-us">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132877982-1"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-    <!-- Vendor: Javascripts -->
+    gtag('config', 'UA-132877982-1');
+  </script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1.0">
 
+  <title>M. Rosenfeld</title>
+  <link rel="stylesheet" href="css/style.css">
 
-    <!-- Vendor: Angular, followed by our custom Javascripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
+  <!-- Vendor: Javascripts -->
 
-
-    <!-- Our Website Javascripts -->
-    <script src="js/main.js"></script>
-    <script src="js/util.js"></script>
-
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+  <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 
-  </head>
-  <body ng-app="myApp" ng-controller="PageCtrl">
-      <div ng-include='"views/templates/header.html"'></div>
+  <!-- Vendor: Angular, followed by our custom Javascripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.25/angular-route.js"></script>
 
-      <div class="content">
-        <div ng-view></div>
-      </div>
 
-      <footer class="footer">
-        <p style="margin: 7px; color: #bfbfbf;">created and maintained by Matthew Rosenfeld
-        </p>
-      </footer>
+  <!-- Our Website Javascripts -->
+  <script src="js/main.js"></script>
+  <script src="js/util.js"></script>
 
-  </body>
+
+
+</head>
+
+<body ng-app="myApp" ng-controller="PageCtrl">
+  <div ng-include='"views/templates/header.html"'></div>
+
+  <div class="content">
+    <div ng-view></div>
+  </div>
+
+  <footer class="footer">
+    <p style="margin: 7px; color: #bfbfbf;">created and maintained by Matthew Rosenfeld
+    </p>
+  </footer>
+
+</body>
+
 </html>
