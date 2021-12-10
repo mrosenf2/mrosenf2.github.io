@@ -1,0 +1,9 @@
+.footer {
+  color: white;
+  padding: 3px;
+  margin: 10px;
+  border: 3px;
+  background-color: #333;
+  font-family: Lucida Console;
+  font-size: 10px;
+}

@@ -50,9 +50,7 @@ function initMap() {
       }
       //addMarker(photo, map)
     })
-    var markers = allPhotos.map(photo => {
-      return addMarker(photo)
-    })
+    var markers = allPhotos.map(photo => addMarker(photo))
     var markerCluster = new MarkerClusterer(map, markers,
       {imagePath: 'clusterimg/m',
       gridSize: 80,

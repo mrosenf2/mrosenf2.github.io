@@ -1,0 +1,33 @@
+html {
+  height: 100%;
+}
+
+.content a:hover {
+  color: rgba(255, 0, 0.5);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.content a:link {
+  color: rgba(250, 0, 0, 0.75);
+
+  text-decoration: none;
+}
+
+
+
+main {
+  margin-left: 20px;
+  font-family: Lucida Console;
+  line-height: 1.5;
+
+}
+
+
+h1 {
+  font-size: 32px;
+}
+
+img {
+  max-width: 300px;
+}

@@ -1,0 +1,36 @@
+nav {
+  margin: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+
+}
+
+nav li {
+  float: left;
+}
+
+nav li.contact {
+  float: right;
+}
+
+
+nav li a, nav li form {
+    display: flex;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav li a:hover {
+    background-color: rgba(240, 0, 0, 0.5);
+}
+.active {
+  background-color: rgba(100, 0, 0, 0.5);
+}
