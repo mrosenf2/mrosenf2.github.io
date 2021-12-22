@@ -1,9 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './MainHeader.css';
 
 
 export default function MainHeader() {
-    const active = (navData) => navData.isActive ? "active" : "";
+    // const active = (navData) => navData.isActive ? "active" : "";
     return (
         <nav>
             <ul>

@@ -1,0 +1,13 @@
+.info-content {
+    margin: 0px;
+}
+
+.info-shown {
+  opacity: 1;
+  transition: all 250ms linear;
+}
+
+.info-hidden {
+  opacity: 0;
+  transition: all 250ms linear 1s;
+}
