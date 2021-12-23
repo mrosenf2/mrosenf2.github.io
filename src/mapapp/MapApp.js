@@ -23,7 +23,7 @@ const mapStyles = {
 const center = { lat: 15.9757, lng: 102.6331 };
 
 // const url_files = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/AsiaPhotos/";
-const url_meta = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/meta.json";
+const url_meta = "https://storage.googleapis.com/app.mrosenfeld.net/mapapp/meta.json";
 
 /**
  * @param {PhotoData[]} photoArr

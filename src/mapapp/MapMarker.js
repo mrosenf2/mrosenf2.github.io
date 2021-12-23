@@ -8,7 +8,7 @@ import { useState } from "react";
 import marker_icon from "./marker.png";
 import "./MapMarker.css";
 
-const url_files = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/AsiaPhotos/";
+const url_files = "https://storage.googleapis.com/app.mrosenfeld.net/mapapp/AsiaPhotos/";
 
 const MyInfoWindow = ({ jsonData, position, onOpen, showInfo, setShowInfo }) => {
     const [curInfoWindow, setCurInfoWindow] = useState(null);

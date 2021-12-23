@@ -2,7 +2,7 @@
   "name": "mrosenf2-github-io",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/mrosenf2/mrosenf2.github.io",
+  "homepage": "https://mrosenf2.github.io",
   "dependencies": {
     "@react-google-maps/api": "^2.7.0",
     "@testing-library/jest-dom": "^5.16.1",
@@ -20,7 +20,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -b master -d build"
   },
   "eslintConfig": {
     "extends": [
