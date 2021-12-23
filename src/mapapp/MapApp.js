@@ -1,15 +1,17 @@
+/** 
+ * @typedef { import("@react-google-maps/marker-clusterer").ClustererOptions } ClustererOptions 
+ */
+
 import { GoogleMap, MarkerClusterer, useJsApiLoader } from "@react-google-maps/api";
 import { useEffect, useState, useCallback } from "react";
 import MapMarker from "./MapMarker";
 
-/** 
- * @typedef { import("@react-google-maps/marker-clusterer").ClustererOptions } ClustererOptions 
- */
 
 const API_KEY = "AIzaSyDkW3KVPNek__Vq8Qxnnbhp8iZBzRMXMQM";
 
 const mapStyles = {
     default: null,
+    /** @type {google.maps.MapTypeStyle[]} */
     hide: [
         {
             featureType: "poi.business",
@@ -73,8 +75,7 @@ export default function MapApp() {
 
     const fetchData = async () => {
         try {
-            const resp = await fetch(url_meta);
-            const data = await resp.json();
+            const data = await fetch(url_meta).then(resp => resp.json());
             console.log(data);
             /** @type {PhotoData[]} */
             const allPhotos = [...data.photodata];
@@ -102,13 +103,6 @@ export default function MapApp() {
         fetchData();
     }, []);
 
-    const onLoad = useCallback((map) => {
-        // setMap(map);
-    }, []);
-
-    const onUnmount = useCallback(() => {
-        // setMap(null);
-    }, []);
 
     const onOpen = (infoWindow) => {
         console.log(infoWindow);
@@ -124,8 +118,6 @@ export default function MapApp() {
             mapContainerStyle={mapContainerStyle}
             center={center}
             zoom={6}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
         >
             <MarkerClusterer options={clstrOptions}>
                 {(clusterer) =>

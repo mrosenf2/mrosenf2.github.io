@@ -1,8 +1,12 @@
+/**
+ * @typedef { import("@react-google-maps/marker-clusterer").Clusterer } Clusterer
+ */
+
 import { InfoWindow, Marker } from "@react-google-maps/api";
 import { useState } from "react";
+// @ts-ignore
 import marker_icon from "./marker.png";
 import "./MapMarker.css";
-import { Clusterer } from "./@types";
 
 const url_files = "http://storage.googleapis.com/app.mrosenfeld.net/mapapp/AsiaPhotos/";
 
@@ -19,7 +23,6 @@ const MyInfoWindow = ({ jsonData, position, onOpen, showInfo, setShowInfo }) => 
 
     const mouseOutHandler = () => {
         console.log("mousout");
-        // setShowInfo(false);
     };
 
     let infoContent = (
@@ -32,7 +35,7 @@ const MyInfoWindow = ({ jsonData, position, onOpen, showInfo, setShowInfo }) => 
 
     const infoWindow = (
         <InfoWindow
-            onUnmount={() => {
+            onCloseClick={() => {
                 setShowInfo(false);
             }}
             options={{ maxWidth: 250 }}
@@ -52,9 +55,9 @@ const MyInfoWindow = ({ jsonData, position, onOpen, showInfo, setShowInfo }) => 
                 <div
                     className={`info-window ${showInfo ? "info-shown" : "info-hidden"}`}
                     onMouseLeave={mouseOutHandler}
-                    onTransitionEnd={() => {
-                        setShowInfo(false);
-                    }}
+                    // onTransitionEnd={() => {
+                    //     setShowInfo(false);
+                    // }}
                 >
                     {infoWindow}
                 </div>
@@ -64,9 +67,9 @@ const MyInfoWindow = ({ jsonData, position, onOpen, showInfo, setShowInfo }) => 
 };
 
 /**
- * 
- * @param {{jsonData: PhotoData, clusterer: Clusterer, onOpen: () => void}} param0 
- * @returns 
+ *
+ * @param {{jsonData: PhotoData, clusterer: Clusterer, onOpen: () => void}} param0
+ * @returns
  */
 export default function MapMarker({ jsonData, clusterer, onOpen }) {
     const [showInfo, setShowInfo] = useState(false);
@@ -79,7 +82,6 @@ export default function MapMarker({ jsonData, clusterer, onOpen }) {
 
     const onInfoWindowOpen = () => {};
 
-    console.log(marker_icon);
     return (
         <Marker
             clusterer={clusterer}
